@@ -67,7 +67,7 @@ public class SLList<T>{
     }
 
     /** Returns number of items in the list. */
-    public int size(){
+    public  int size(){
         return this.size;
     }
 
