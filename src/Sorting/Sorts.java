@@ -26,7 +26,7 @@ public class Sorts {
         int[] ts = {17, 15, 19, 32, 2, 26, 41, 17, 17};
         Sorts s = new Sorts(ts);
         s.printList();
-        s.hoarePartitioning();
+        s.insertionSort();
         s.printList();
 
     }
@@ -41,18 +41,18 @@ public class Sorts {
      * basically on ALMOST sorted arrays, runtime is Θ(N + K), K = # of inversions
      */
     public void insertionSort() {
-        int inversions = 0;
+        int swaps = 0;
         for (int examined = 1; examined < arr.length; examined++) {
             for (int traveller = examined; traveller > 0; traveller--) {
                 if (arr[traveller] < arr[traveller - 1]) {
                     swap(traveller, traveller - 1);
-                    inversions++;
+                    swaps++;
                 } else {
                     break;
                 }
             }
         }
-        System.out.println("Inversions: " + inversions);
+        System.out.println("Inversions: " + swaps);
     }
 
     /**
