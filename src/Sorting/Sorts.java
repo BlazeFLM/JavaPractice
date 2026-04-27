@@ -23,22 +23,23 @@ public class Sorts {
     }
 
     static void main() {
-        int[] ts = {123, 2171, 271, 192, 347, 812, 6153, 832, 975};
+        int[] ts = {17, 15, 19, 32, 2, 26, 41, 17, 17};
         Sorts s = new Sorts(ts);
         s.printList();
-        s.insertionSort();
+        s.hoarePartitioning();
         s.printList();
 
     }
 
-    // In-place insertion sort
-    // Best case: Θ(N) - already sorted, still have to go through all
-    // Worst case: Θ(N^2) - swap N times with every element of N
-    // Observations:
-    // Each swap in Insertion Sort reduces the number of inversions by 1
-    // Insertion sort is REALLY fast on arrays with small number of inversions
-    // basically on ALMOST sorted arrays, runtime is Θ(N + K), K = # of inversions
-
+    /**
+     * In-place insertion sort
+     * Best case: Θ(N) - already sorted, still have to go through all
+     * Worst case: Θ(N^2) - swap N times with every element of N
+     * Observations:
+     * Each swap in Insertion Sort reduces the number of inversions by 1
+     * Insertion sort is REALLY fast on arrays with small number of inversions
+     * basically on ALMOST sorted arrays, runtime is Θ(N + K), K = # of inversions
+     */
     public void insertionSort() {
         int inversions = 0;
         for (int examined = 1; examined < arr.length; examined++) {
@@ -52,6 +53,50 @@ public class Sorts {
             }
         }
         System.out.println("Inversions: " + inversions);
+    }
+
+    /**
+     * Hoare Partitioning:
+     * L stops on items >= pivot
+     * pivot -> (first item, but median results in faster overall runtime)
+     * G stops on items <= pivot
+     * Walk pointers towards each other
+     * When pointers both stop, swap and move pointers by one
+     * When pointers cross stop and swap element G with pivot
+     * Time complexity: Θ(N) Space complexity: Θ(1)
+     * Bad for mostly sorted, reverse sorted
+     * If almost sorted just use insertion sort probably
+     * Use median instead of leftmost element
+     * Arrays of duplicates can cause Θ(N^2) behavior
+     */
+    public void hoarePartitioning() {
+        int pivot = arr[0];
+        int L = 1;
+        int G = arr.length - 1;
+        boolean lStop = false;
+        boolean gStop = false;
+        while (L <= G) {
+            if (arr[L] >= pivot) {
+                lStop = true;
+            } else {
+                L++;
+            }
+            if (arr[G] <= pivot) {
+                gStop = true;
+            } else {
+                G--;
+            }
+            if (lStop && gStop) {
+                swap(L, G);
+                L++;
+                G--;
+            }
+        }
+        swap(G, 0);
+    }
+
+    public void quickSort(){
+
     }
 
 
