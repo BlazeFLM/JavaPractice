@@ -23,12 +23,23 @@ public class Sorts {
     }
 
     static void main() {
-        int[] ts = {17, 15, 19, 32, 2, 26, 41, 17, 17};
+        int[] ts = {5, 6, 7, 8, 1, 2, 3, 4};
         Sorts s = new Sorts(ts);
         s.printList();
-        s.insertionSort();
+        s.hoarePartitioning();
         s.printList();
 
+    }
+
+    /**
+     * In-place Selection sort
+     */
+    public void selectionSort() {
+
+    }
+
+    public int[] selectionSortHelper(int[] list){
+        return null;
     }
 
     /**
@@ -90,12 +101,14 @@ public class Sorts {
                 swap(L, G);
                 L++;
                 G--;
+                lStop = false;
+                gStop = false;
             }
         }
         swap(G, 0);
     }
 
-    public void quickSort(){
+    public void quickSort() {
 
     }
 
@@ -105,6 +118,17 @@ public class Sorts {
         int temp = arr[a];
         arr[a] = arr[b];
         arr[b] = temp;
+    }
+
+    // Helper minimum method
+    private int min(int[] list) {
+        int minimum = list[0];
+        for (int i = 0; i < list.length; i++){
+            if (minimum > list[i]){
+                minimum = list[i];
+            }
+        }
+        return minimum;
     }
 
     public void printList() {
